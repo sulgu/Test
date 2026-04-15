@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WeatherCast Playlist</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="page-shell">
+    <header class="hero">
+      <p class="eyebrow">Weather x YouTube x Telegram</p>
+      <h1>오늘 날씨를 듣고<br>유튜브 플레이리스트를 고릅니다.</h1>
+      <p class="hero-copy">
+        현재 위치나 입력한 지역의 날씨를 분석해 분위기에 맞는 음악을 추천하고,
+        원하면 매일 아침 6시에 텔레그램으로 같은 추천을 자동 전송할 수 있습니다.
+      </p>
+    </header>
+
+    <main class="layout">
+      <section class="panel control-panel">
+        <div class="panel-header">
+          <h2>날씨 불러오기</h2>
+          <span>한세대학교 고정</span>
+        </div>
+
+        <label class="field">
+          <span>지역 입력</span>
+          <input id="locationInput" type="text" placeholder="경기도 군포시 한세로 30 한세대학교" readonly>
+        </label>
+
+        <div class="quick-tags" id="quickTags"></div>
+
+        <div class="actions">
+          <button id="detectButton" class="secondary" type="button">한세대학교 기준으로 보기</button>
+          <button id="recommendButton" class="primary" type="button">추천 받기</button>
+        </div>
+
+        <p id="statusMessage" class="status">지역을 입력하거나 현재 위치를 사용해 날씨와 플레이리스트를 불러오세요.</p>
+
+        <div class="weather-card">
+          <p class="summary-label">현재 날씨</p>
+          <strong id="weatherSummary">아직 조회하지 않음</strong>
+          <p id="weatherMeta" class="weather-meta">기온, 강수 확률, 풍속 정보가 여기에 표시됩니다.</p>
+        </div>
+      </section>
+
+      <section class="panel result-panel">
+        <div class="panel-header">
+          <h2>오늘의 유튜브 플레이리스트</h2>
+          <span id="playlistLabel">아직 생성하지 않음</span>
+        </div>
+
+        <div class="playlist-summary">
+          <div>
+            <p class="summary-label">추천 기준</p>
+            <strong id="moodSummary">날씨를 기다리는 중</strong>
+          </div>
+          <div>
+            <p class="summary-label">추천 아티스트</p>
+            <strong id="artistSummary">-</strong>
+          </div>
+        </div>
+
+        <div class="player-wrap">
+          <iframe
+            id="youtubePlayer"
+            title="YouTube Playlist Player"
+            src="https://www.youtube.com/embed?rel=0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+          ></iframe>
+        </div>
+
+        <div class="playlist-tools">
+          <button id="openYoutubeButton" class="secondary" type="button">유튜브에서 열기</button>
+          <button id="copyPlaylistButton" class="secondary" type="button">목록 복사</button>
+        </div>
+
+        <ul id="playlistItems" class="playlist-items"></ul>
+      </section>
+
+      <section class="panel telegram-panel">
+        <div class="panel-header">
+          <h2>텔레그램 자동 전송</h2>
+          <span>매일 오전 6시</span>
+        </div>
+
+        <label class="field">
+          <span>텔레그램 Chat ID</span>
+          <input id="telegramChatIdInput" type="text" placeholder="예: 123456789">
+        </label>
+
+        <label class="field">
+          <span>텔레그램 Bot Token</span>
+          <input id="telegramBotTokenInput" type="password" placeholder="예: 123456:ABCDEF...">
+        </label>
+
+        <label class="toggle-field" for="telegramEnabledInput">
+          <span>매일 아침 6시 자동 전송 사용</span>
+          <input id="telegramEnabledInput" type="checkbox">
+        </label>
+
+        <div class="actions">
+          <button id="saveTelegramButton" class="primary" type="button">설정 저장</button>
+          <button id="sendTelegramNowButton" class="secondary" type="button">지금 테스트 전송</button>
+        </div>
+
+        <p id="telegramStatusMessage" class="status">
+          Chat ID와 Bot Token을 저장하면 서버가 실행 중일 때 매일 오전 6시에 자동 전송합니다.
+        </p>
+
+        <div class="telegram-note">
+          <p>주의: 개인 메시지 전송은 텔레그램 봇과 먼저 대화를 시작한 뒤 해당 Chat ID를 입력해야 합니다.</p>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
